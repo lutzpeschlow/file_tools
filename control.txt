@@ -1,4 +1,4 @@
 ACTION SIZING
-DIR .
-NUM 20
+DIR c:\tmp\bosch
+NUM 10
 VIEW text

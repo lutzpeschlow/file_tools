@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 	"runtime"
 
-	// "github.com/lutzpeschlow/file_tools/ctrl"
+	// separator - standard vs. own
 	"github.com/lutzpeschlow/file_tools/ctrl"
+	"github.com/lutzpeschlow/file_tools/sizing"
 )
 
 // ============================================================================
@@ -15,6 +15,7 @@ import (
 func main() {
 	// instance of control object
 	ctrl_obj := ctrl.Control_Object{}
+	file_obj := sizing.FileList{}
 	// check operating system
 	osName := runtime.GOOS
 	fmt.Print("operating system: ", osName, "\n")
@@ -30,17 +31,9 @@ func main() {
 	fmt.Print("Settings: ", ctrl_obj.Action, " ", ctrl_obj.Dir, " ",
 		ctrl_obj.Num, " ", ctrl_obj.View, "\n")
 
-	// short test of file path walk
-	root := "."
-	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		if !info.IsDir() {
-			fmt.Println(path)
-		}
-		return nil
-	})
+	// short test of file list
+	err_siz := sizing.GetFileList(ctrl_obj.Dir, &file_obj)
+
 	// error value
-	fmt.Print("finalize: ", err)
+	fmt.Print("finalize: ", err_siz)
 }

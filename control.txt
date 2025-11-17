@@ -1,4 +1,4 @@
 ACTION SIZING
-DIR c:\tmp\python
+DIR .
 NUM 20
 VIEW text

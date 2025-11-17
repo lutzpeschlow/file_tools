@@ -15,11 +15,17 @@ type FileInfo struct {
 }
 
 type FileList struct {
-	Files []FileInfo
+	Files  []FileInfo
+	Sorted []FileInfo
 }
 
+// function GetFileList
+// lists files and size
+//
+// possible gui: Fyne, Gio, go-gtk, Wails, Unison
 func GetFileList(ctrl *ctrl.Control_Object, obj *FileList) error {
 	var files []FileInfo
+	var sorted []FileInfo
 
 	err := filepath.Walk(ctrl.Dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -47,10 +53,12 @@ func GetFileList(ctrl *ctrl.Control_Object, obj *FileList) error {
 	for i, file := range files {
 		if i <= ctrl.Num {
 			fmt.Print(" ", file.Size, " ", file.FileName, " ", i, " \n")
+			sorted = append(sorted, FileInfo{FileName: file.FileName, Size: file.Size})
 		}
 
 	}
 
 	obj.Files = files
+	obj.Sorted = sorted
 	return nil
 }

@@ -1,0 +1,4 @@
+ACTION SIZING
+DIR .
+NUM 20
+VIEW text

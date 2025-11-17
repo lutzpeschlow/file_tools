@@ -3,6 +3,7 @@ package ctrl
 import (
 	"bufio"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -10,7 +11,7 @@ import (
 type Control_Object struct {
 	Action string
 	Dir    string
-	Num    string
+	Num    int
 	View   string
 }
 
@@ -29,7 +30,7 @@ func ReadControlFile(path string, obj *Control_Object, osName string) error {
 	// defaults
 	obj.Action = "SIZING"
 	obj.Dir = "."
-	obj.Num = "20"
+	obj.Num = 20
 	obj.View = "text"
 	// pointer to file for later opening, err as interface value
 	file, err := os.Open(path)
@@ -51,8 +52,8 @@ func ReadControlFile(path string, obj *Control_Object, osName string) error {
 				obj.Action = parts[1]
 			case "DIR":
 				obj.Dir = parts[1]
-			case "Num":
-				obj.Num = parts[1]
+			case "NUM":
+				obj.Num, err = strconv.Atoi(parts[1])
 			case "VIEW":
 				obj.View = parts[1]
 			}

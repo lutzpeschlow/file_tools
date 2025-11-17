@@ -1,4 +1,4 @@
 ACTION SIZING
-DIR c:\tmp\bosch
-NUM 10
+DIR c:\tmp\python
+NUM 20
 VIEW text

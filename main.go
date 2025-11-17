@@ -32,7 +32,7 @@ func main() {
 		ctrl_obj.Num, " ", ctrl_obj.View, "\n")
 
 	// short test of file list
-	err_siz := sizing.GetFileList(ctrl_obj.Dir, &file_obj)
+	err_siz := sizing.GetFileList(&ctrl_obj, &file_obj)
 
 	// error value
 	fmt.Print("finalize: ", err_siz)

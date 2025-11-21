@@ -8,6 +8,7 @@ import (
 
 	// separator - standard vs. own
 	"github.com/lutzpeschlow/file_tools/ctrl"
+	"github.com/lutzpeschlow/file_tools/scaledown"
 	"github.com/lutzpeschlow/file_tools/sizing"
 )
 
@@ -32,11 +33,21 @@ func main() {
 	fmt.Print("Settings: ", ctrl_obj.Action, " ", ctrl_obj.Dir, " ",
 		ctrl_obj.Num, " ", ctrl_obj.View, "\n")
 
-	// short test of file list
-	err_siz := sizing.GetFileList(&ctrl_obj, &file_obj)
+	if ctrl_obj.Action == "SIZING" {
+		err_siz := sizing.GetFileList(&ctrl_obj, &file_obj)
+		fmt.Print("finalize: ", err_siz)
+	}
+
+	if ctrl_obj.Action == "SCALEDOWN" {
+		err_scale := scaledown.ScaleDown(&ctrl_obj)
+		fmt.Print("finalize: ", err_scale)
+
+	}
 
 	// error value
-	fmt.Print("finalize: ", err_siz)
+
 }
 
 // =====================================================
+
+// convert input.jpg -resize 2048x2048\> -strip -quality 70 output.jpg

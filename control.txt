@@ -1,4 +1,4 @@
-ACTION SIZING
-DIR .
+ACTION SCALEDOWN
+DIR /home/lutz/dir_sorted/krampfader
 NUM 20
 VIEW text

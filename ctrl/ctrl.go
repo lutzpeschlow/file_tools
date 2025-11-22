@@ -2,6 +2,7 @@ package ctrl
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -61,4 +62,12 @@ func ReadControlFile(path string, obj *Control_Object, osName string) error {
 	}
 	// return value is the error interface value of the scanner
 	return scanner.Err()
+}
+
+func DebugPrintoutCtrlObj(obj *Control_Object) {
+	fmt.Print("debug printout of control object: \n")
+	fmt.Print(" Action: ", obj.Action, "\n")
+	fmt.Print(" Dir:    ", obj.Dir, "\n")
+	fmt.Print(" Num:    ", obj.Num, "\n")
+	fmt.Print(" View:   ", obj.View, "\n")
 }

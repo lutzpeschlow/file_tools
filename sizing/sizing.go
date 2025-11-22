@@ -1,7 +1,6 @@
 package sizing
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
@@ -50,9 +49,10 @@ func GetFileList(ctrl *ctrl.Control_Object, obj *FileList) error {
 	sort.Slice(files, func(i, j int) bool {
 		return files[i].Size > files[j].Size
 	})
+
 	for i, file := range files {
 		if i <= ctrl.Num {
-			fmt.Print(" ", file.Size, " ", file.FileName, " ", i, " \n")
+			// fmt.Print(" ", file.Size, " ", file.FileName, " ", i, " \n")
 			sorted = append(sorted, FileInfo{FileName: file.FileName, Size: file.Size})
 		}
 

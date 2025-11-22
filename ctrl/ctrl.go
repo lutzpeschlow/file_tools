@@ -10,10 +10,11 @@ import (
 
 // control object
 type Control_Object struct {
-	Action string
-	Dir    string
-	Num    int
-	View   string
+	Action    string
+	Dir       string
+	Num       int
+	View      string
+	LimitSize int
 }
 
 // ReadControlFile function to read a control file from path and
@@ -33,6 +34,7 @@ func ReadControlFile(path string, obj *Control_Object, osName string) error {
 	obj.Dir = "."
 	obj.Num = 20
 	obj.View = "text"
+	obj.LimitSize = 5000000
 	// pointer to file for later opening, err as interface value
 	file, err := os.Open(path)
 	// if we have an error go out with returning err value
@@ -57,6 +59,8 @@ func ReadControlFile(path string, obj *Control_Object, osName string) error {
 				obj.Num, err = strconv.Atoi(parts[1])
 			case "VIEW":
 				obj.View = parts[1]
+			case "LIMITSIZE":
+				obj.LimitSize, err = strconv.Atoi(parts[1])
 			}
 		}
 	}
@@ -66,8 +70,9 @@ func ReadControlFile(path string, obj *Control_Object, osName string) error {
 
 func DebugPrintoutCtrlObj(obj *Control_Object) {
 	fmt.Print("debug printout of control object: \n")
-	fmt.Print(" Action: ", obj.Action, "\n")
-	fmt.Print(" Dir:    ", obj.Dir, "\n")
-	fmt.Print(" Num:    ", obj.Num, "\n")
-	fmt.Print(" View:   ", obj.View, "\n")
+	fmt.Print(" Action:    ", obj.Action, "\n")
+	fmt.Print(" Dir:       ", obj.Dir, "\n")
+	fmt.Print(" Num:       ", obj.Num, "\n")
+	fmt.Print(" View:      ", obj.View, "\n")
+	fmt.Print(" LimitSize: ", obj.LimitSize, "\n")
 }

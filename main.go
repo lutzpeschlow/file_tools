@@ -46,12 +46,14 @@ func main() {
 				fmt.Print(" ", file.Size, " ", file.FileName, " ", i, " \n")
 			}
 		}
-
 	}
 	// (1.2) SCALEDOWN
 	if ctrl_obj.Action == "SCALEDOWN" {
+		fmt.Print(("SIZING ... \n"))
 		err_scale := scaledown.ScaleDown(&ctrl_obj)
-		fmt.Print("finalize: ", err_scale)
+		if err_scale != nil {
+			fmt.Print(err_scale, "\n")
+		}
 
 	}
 	// // Fyne-Aufruf nur hier innerhalb der if-Bedingung
@@ -84,5 +86,3 @@ func main() {
 } //
 
 // =====================================================
-
-// convert input.jpg -resize 2048x2048\> -strip -quality 70 output.jpg

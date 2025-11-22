@@ -52,7 +52,7 @@ func main() {
 		fmt.Print(("SIZING ... \n"))
 		err_scale := scaledown.ScaleDown(&ctrl_obj)
 		if err_scale != nil {
-			fmt.Print(err_scale, "\n")
+			fmt.Print("err_scale: ", err_scale, "\n")
 		}
 
 	}

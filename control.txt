@@ -1,5 +1,5 @@
 ACTION SCALEDOWN
-DIR /home/lutz/dir_sorted/20250715_masserberg
+DIR /home/lutz/dir_sorted/20240708_achensee
 NUM 5
 VIEW text
 LIMITSIZE 3000000

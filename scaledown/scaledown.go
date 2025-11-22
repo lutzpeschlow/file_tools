@@ -30,20 +30,15 @@ func isJpgOrPng(filename string) bool {
 // output file is getting name with additional characters
 func GetOutputFileName(inputFile string) (string, error) {
 	dotIndex := strings.LastIndex(inputFile, ".")
-	fmt.Print(dotIndex, "\n")
 	outputFile := inputFile[:dotIndex] + "_rs" + inputFile[dotIndex:]
-	// no dot in file name
 	if dotIndex < 1 {
 		return "", errors.New("ERROR: no extension found")
 	}
-	// return renamed output file
 	return outputFile, nil
 }
 
 // convert input.jpg -resize 2048x2048\> -strip -quality 70 output.jpg
 func CmdImageMagick(inputFile string, outputFile string) error {
-	fmt.Print(" executing image magick ...", "\n")
-
 	cmd := exec.Command("convert",
 		inputFile,
 		"-resize", "2048x2048>",
@@ -51,7 +46,6 @@ func CmdImageMagick(inputFile string, outputFile string) error {
 		"-quality", "70",
 		outputFile,
 	)
-
 	err := cmd.Run()
 	if err != nil {
 		fmt.Println("Error :", err)
@@ -76,12 +70,13 @@ func ScaleDown(ctrl *ctrl.Control_Object) error {
 				Size:     info.Size(),
 			})
 			// reduce if size larger than LimitSize
-			if info.Size() > int64(ctrl.LimitSize) {
+			if info.Size() > int64(ctrl.LimitSize) && isJpgOrPng(path) {
 				fmt.Print(path, " with size: ", info.Size(), " \n")
 				// executing image magick
+				outputFile, _ := GetOutputFileName(path)
 				err_cmd := CmdImageMagick(path, outputFile)
 				if err_cmd != nil {
-					fmt.Print(err_cmd, "\n")
+					fmt.Print("err_cmd: ", err_cmd, "\n")
 					return err_cmd
 				}
 

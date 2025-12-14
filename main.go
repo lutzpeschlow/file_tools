@@ -8,6 +8,7 @@ import (
 
 	// --- separator - standard vs. own ---
 	"github.com/lutzpeschlow/file_tools/ctrl"
+	"github.com/lutzpeschlow/file_tools/db"
 	"github.com/lutzpeschlow/file_tools/scaledown"
 	"github.com/lutzpeschlow/file_tools/sizing"
 )
@@ -19,6 +20,7 @@ func main() {
 	// instance of control object
 	ctrl_obj := ctrl.Control_Object{}
 	file_obj := sizing.FileList{}
+	db_obj := db.FileList{}
 	// check operating system
 	osName := runtime.GOOS
 	fmt.Print("operating system: ", osName, "\n")
@@ -49,12 +51,25 @@ func main() {
 	}
 	// (1.2) SCALEDOWN
 	if ctrl_obj.Action == "SCALEDOWN" {
-		fmt.Print(("SIZING ... \n"))
+		fmt.Print(("SCALEDOWN ... \n"))
 		err_scale := scaledown.ScaleDown(&ctrl_obj)
 		if err_scale != nil {
 			fmt.Print("err_scale: ", err_scale, "\n")
 		}
 
+	}
+	// (1.3) DB
+	if ctrl_obj.Action == "DB" {
+		fmt.Print(("DB ... \n"))
+		err_db := db.GetFileList(&ctrl_obj, &db_obj)
+		if err_db != nil {
+			fmt.Print("err_db: ", err_db, "\n")
+		}
+		for i, file := range db_obj.Files {
+			if i <= ctrl_obj.Num {
+				fmt.Print(" ", file.Size, " ", file.FileName, " ", i, " \n")
+			}
+		}
 	}
 	// // Fyne-Aufruf nur hier innerhalb der if-Bedingung
 	// myApp := app.New()

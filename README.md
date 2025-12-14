@@ -8,6 +8,7 @@ the tools will be selected via control file which define an action and some addi
 planned tools are:
 - SIZING (create a list of files, sorted by size, in a defined directory with all subdirectories
 - SCALEDOWN (scale graphic files down by dimensions, quality, size using external tool as ImageMagick or other tools)
+- DB search .db files that could be removed in general
 
 
 
@@ -26,6 +27,18 @@ VIEW text
 LIMITSIZE 3000000
 
 
+
+ACTION DB
+DIR c:/tmp
+NUM 30
+VIEW text
+LIMITSIZE 3000000
+
+ACTION DB
+DIR c:/tmp
+NUM 30
+VIEW delete
+LIMITSIZE 3000000
 
 
 
